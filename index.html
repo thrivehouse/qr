@@ -49,11 +49,6 @@
         background: #9fb79d;
         cursor: pointer;
       }
-
-      #msg {
-        margin-top: 12px;
-        min-height: 20px;
-      }
     </style>
   </head>
 
@@ -69,8 +64,6 @@
       <form
         action="https://script.google.com/macros/s/AKfycbx4vrLD7E-l9BSTxE1dmhtKE4cVHyEsyK6dCS8wskKtYXYs3MluJ1NyFEZJFg-Y9Ug/exec"
         method="POST"
-        target="hidden_iframe"
-        onsubmit="showSuccess()"
       >
         <input
           type="email"
@@ -79,19 +72,11 @@
           required
         />
         <button type="submit">Notify me</button>
-        <div id="msg"></div>
       </form>
 
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
+      <p style="margin-top:24px; font-size:14px; opacity:0.7;">
+        You’ll see a confirmation after submitting.
+      </p>
     </div>
-
-    <script>
-      function showSuccess() {
-        setTimeout(() => {
-          document.getElementById("msg").innerText =
-            "You’re in. Thank you.";
-        }, 600);
-      }
-    </script>
   </body>
 </html>
