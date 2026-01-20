@@ -67,63 +67,41 @@
       <h1>Interested in alcohol-free social events?</h1>
 
       <p>
-        We’re exploring intimate, alcohol-free evenings focused on real
-        connection. Leave your email and we’ll keep you posted.
+        We’re exploring intimate, alcohol-free evenings focused on real connection.
+        Leave your email and we’ll keep you posted.
       </p>
 
-      <form id="emailForm">
-        <input
-          id="email"
-          type="email"
-          placeholder="Your email"
-          required
-        />
+      <form
+        id="emailForm"
+        action="https://script.google.com/macros/s/AKfycbw4oIjfz_1a7N7MUkzl7SXU4rxpdyHWDsux8TgFdgJaiPUSc3VNjkN-xLSjHluYVxAt/exec"
+        method="POST"
+        target="hidden_iframe"
+      >
+        <input id="email" name="email" type="email" placeholder="Your email" required />
         <button id="btn" type="submit">Notify me</button>
         <p id="msg"></p>
       </form>
+
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
     </div>
 
     <script>
-      const SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbw4oIjfz_1a7N7MUkzl7SXU4rxpdyHWDsux8TgFdgJaiPUSc3VNjkN-xLSjHluYVxAt/exec";
-
       const form = document.getElementById("emailForm");
       const emailInput = document.getElementById("email");
       const btn = document.getElementById("btn");
       const msg = document.getElementById("msg");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
+      form.addEventListener("submit", () => {
         msg.textContent = "";
         btn.disabled = true;
         btn.textContent = "Submitting...";
 
-        try {
-          const res = await fetch(SCRIPT_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify({
-              email: emailInput.value
-            })
-          });
-
-          const data = await res.json();
-
-          if (data.ok) {
-            msg.textContent = "You’re in. Thank you.";
-            emailInput.value = "";
-          } else {
-            msg.textContent = "Something went wrong. Please try again.";
-          }
-        } catch (err) {
-          msg.textContent = "Something went wrong. Please try again.";
-        } finally {
+        setTimeout(() => {
+          msg.textContent = "You’re in. Thank you.";
+          emailInput.value = "";
           btn.disabled = false;
           btn.textContent = "Notify me";
-        }
+        }, 900);
       });
     </script>
   </body>
