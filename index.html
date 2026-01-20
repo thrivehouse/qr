@@ -50,11 +50,6 @@
         cursor: pointer;
       }
 
-      button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
       #msg {
         margin-top: 12px;
         min-height: 20px;
@@ -72,37 +67,31 @@
       </p>
 
       <form
-        id="emailForm"
-        action="https://script.google.com/macros/s/AKfycbw4oIjfz_1a7N7MUkzl7SXU4rxpdyHWDsux8TgFdgJaiPUSc3VNjkN-xLSjHluYVxAt/exec"
+        action="https://script.google.com/macros/s/AKfycbx4vrLD7E-l9BSTxE1dmhtKE4cVHyEsyK6dCS8wskKtYXYs3MluJ1NyFEZJFg-Y9Ug/exec"
         method="POST"
         target="hidden_iframe"
+        onsubmit="showSuccess()"
       >
-        <input id="email" name="email" type="email" placeholder="Your email" required />
-        <button id="btn" type="submit">Notify me</button>
-        <p id="msg"></p>
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+        />
+        <button type="submit">Notify me</button>
+        <div id="msg"></div>
       </form>
 
       <iframe name="hidden_iframe" style="display:none;"></iframe>
     </div>
 
     <script>
-      const form = document.getElementById("emailForm");
-      const emailInput = document.getElementById("email");
-      const btn = document.getElementById("btn");
-      const msg = document.getElementById("msg");
-
-      form.addEventListener("submit", () => {
-        msg.textContent = "";
-        btn.disabled = true;
-        btn.textContent = "Submitting...";
-
+      function showSuccess() {
         setTimeout(() => {
-          msg.textContent = "You’re in. Thank you.";
-          emailInput.value = "";
-          btn.disabled = false;
-          btn.textContent = "Notify me";
-        }, 900);
-      });
+          document.getElementById("msg").innerText =
+            "You’re in. Thank you.";
+        }, 600);
+      }
     </script>
   </body>
 </html>
